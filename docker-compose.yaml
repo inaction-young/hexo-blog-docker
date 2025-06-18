@@ -1,0 +1,56 @@
+services:
+  app-nginx:
+    container_name: app-nginx
+    hostname: app-nginx
+    image: nginx:alpine
+    ports:
+      -  80:80
+      - 443:443
+    restart: always
+    networks:
+      docker-network:
+        ipv4_address: 192.168.159.3
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/log/access.log:/var/nginx/log/access.log
+      - ./nginx/log/error.log:/var/nginx/log/error.log
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128M"
+        max-file: "1"
+
+  blog:
+    container_name: blog
+    hostname: blog
+    image: crpi-h3osktfvc8oa0mk6.cn-shanghai.personal.cr.aliyuncs.com/tj_commons/tsf-blog:1.0.0
+    networks:
+      docker-network:
+        ipv4_address: 192.168.159.6
+    ports:
+      - 4000:4000
+    restart: always
+    volumes:
+      - ./blog/app:/app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128M"
+        max-file: "1"
+
+
+
+
+
+networks:
+  docker-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.159.0/24
+    name: docker-network
+                                                                               
+
