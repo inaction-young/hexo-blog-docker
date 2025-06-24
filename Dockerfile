@@ -9,7 +9,7 @@ RUN apt-get update && \
     yarn global add gulp && \
     npm config set registry https://registry.npmmirror.com && \
     npm install -g pm2 nrm npm-check && \
-    npm install -g hexo-cli && \
+    npm install -g hexo && \
     npm install -g cnpm --registry=https://registry.npmmirror.com && \
     apt-get clean && \
     yarn cache clean && \
