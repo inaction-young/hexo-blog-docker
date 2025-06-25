@@ -7,4 +7,14 @@ hexo docker file
 * 镜像的工作目录：`/app`
 * 默认端口：4000
 
+#### 说明
+* 镜像初次启动会在工作目录下初始化hexo，会执行`hexo init blog`，不会安装任何模版
+* 所以需要自己将`/app/blog`映射出来，将模版、内容放在对应的目录下
+* 后续启动发现有/app/blog目录则不会再初始化hexo
+
+#### Hexo
+* https://hexo.io/zh-cn/
+
+
+
 
